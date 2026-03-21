@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Collection App</title>
+    <meta name="description" content="Gerencie sua coleção de livros — adicione, edite e remova livros facilmente." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <span class="logo-icon">📚</span>
+          <h1>Book Collection</h1>
+        </div>
+        <button class="btn btn-primary" id="btn-open-form" data-testid="btn-open-form">
+          + Adicionar Livro
+        </button>
+      </div>
+    </header>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" data-testid="toast" role="alert" aria-live="polite"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Modal / Form -->
+      <div class="modal-overlay" id="modal-overlay" data-testid="modal-overlay" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+          <div class="modal-header">
+            <h2 class="modal-title" id="modal-title" data-testid="modal-title">Adicionar Livro</h2>
+            <button class="btn-close" id="btn-close-form" data-testid="btn-close-form" aria-label="Fechar">&times;</button>
+          </div>
+
+          <form id="book-form" data-testid="book-form" novalidate>
+            <input type="hidden" id="book-id" data-testid="book-id" />
+
+            <div class="form-group">
+              <label for="titulo">Título <span class="required">*</span></label>
+              <input
+                type="text"
+                id="titulo"
+                name="titulo"
+                data-testid="input-titulo"
+                placeholder="Ex: Dom Casmurro"
+                autocomplete="off"
+              />
+              <span class="field-error" id="error-titulo" data-testid="error-titulo"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="autor">Autor <span class="required">*</span></label>
+              <input
+                type="text"
+                id="autor"
+                name="autor"
+                data-testid="input-autor"
+                placeholder="Ex: Machado de Assis"
+                autocomplete="off"
+              />
+              <span class="field-error" id="error-autor" data-testid="error-autor"></span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="genero">Gênero <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="genero"
+                  name="genero"
+                  data-testid="input-genero"
+                  placeholder="Ex: Romance"
+                  autocomplete="off"
+                />
+                <span class="field-error" id="error-genero" data-testid="error-genero"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="ano">Ano <span class="required">*</span></label>
+                <input
+                  type="number"
+                  id="ano"
+                  name="ano"
+                  data-testid="input-ano"
+                  placeholder="Ex: 1984"
+                  min="1"
+                  max="2100"
+                />
+                <span class="field-error" id="error-ano" data-testid="error-ano"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="imagem">URL da Imagem <span class="required">*</span></label>
+              <input
+                type="url"
+                id="imagem"
+                name="imagem"
+                data-testid="input-imagem"
+                placeholder="https://exemplo.com/capa.jpg"
+                autocomplete="off"
+              />
+              <span class="field-error" id="error-imagem" data-testid="error-imagem"></span>
+            </div>
+
+            <div class="form-group form-group-checkbox">
+              <label class="checkbox-label" for="lido">
+                <input
+                  type="checkbox"
+                  id="lido"
+                  name="lido"
+                  data-testid="input-lido"
+                />
+                <span class="checkbox-custom"></span>
+                Já li este livro
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="form-sinopse">Sinopse</label>
+              <textarea
+                id="form-sinopse"
+                name="sinopse"
+                data-testid="input-sinopse"
+                placeholder="Resumo do livro..."
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="form-review">Minha Review</label>
+              <textarea
+                id="form-review"
+                name="review"
+                data-testid="input-review"
+                placeholder="Sua opinião sobre o livro..."
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Avaliação (0–5 estrelas)</label>
+              <div class="stars form-stars" id="form-stars" data-testid="form-stars" role="group" aria-label="Avaliação de 0 a 5">
+                <button class="star" data-value="1" data-testid="form-star-1" type="button" aria-label="1 estrela">★</button>
+                <button class="star" data-value="2" data-testid="form-star-2" type="button" aria-label="2 estrelas">★</button>
+                <button class="star" data-value="3" data-testid="form-star-3" type="button" aria-label="3 estrelas">★</button>
+                <button class="star" data-value="4" data-testid="form-star-4" type="button" aria-label="4 estrelas">★</button>
+                <button class="star" data-value="5" data-testid="form-star-5" type="button" aria-label="5 estrelas">★</button>
+              </div>
+              <p class="star-hint" id="form-star-hint" data-testid="form-star-hint">Sem avaliação</p>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" id="btn-cancel" data-testid="btn-cancel">
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary" id="btn-submit" data-testid="btn-submit">
+                Salvar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Search & Filter -->
+      <section class="controls" aria-label="Controles de pesquisa">
+        <input
+          type="search"
+          id="search-input"
+          data-testid="search-input"
+          class="search-input"
+          placeholder="🔍 Buscar por título, autor ou gênero..."
+          aria-label="Buscar livros"
+        />
+        <span class="books-count" id="books-count" data-testid="books-count"></span>
+      </section>
+
+      <!-- Loading State -->
+      <div class="loading" id="loading" data-testid="loading" hidden>
+        <div class="spinner"></div>
+        <p>Carregando livros...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state" data-testid="empty-state" hidden>
+        <span class="empty-icon">📖</span>
+        <p>Nenhum livro encontrado.</p>
+        <p class="empty-hint">Clique em "Adicionar Livro" para começar!</p>
+      </div>
+
+      <!-- Books Grid -->
+      <section class="books-grid" id="books-grid" data-testid="books-grid" aria-label="Lista de livros">
+      </section>
+    </main>
+
+    <!-- Delete Confirmation Dialog -->
+    <div class="modal-overlay" id="confirm-overlay" data-testid="confirm-overlay" hidden>
+      <div class="modal modal-sm" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">
+        <div class="modal-header">
+          <h2 class="modal-title" id="confirm-title">Confirmar Exclusão</h2>
+        </div>
+        <p class="confirm-text" id="confirm-text" data-testid="confirm-text"></p>
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="btn-confirm-cancel" data-testid="btn-confirm-cancel">Cancelar</button>
+          <button class="btn btn-danger" id="btn-confirm-delete" data-testid="btn-confirm-delete">Deletar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Book Detail Modal -->
+    <div class="modal-overlay" id="detail-overlay" data-testid="detail-overlay" hidden>
+      <div class="modal modal-detail" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+        <button class="btn-close detail-close" id="btn-close-detail" data-testid="btn-close-detail" aria-label="Fechar">&times;</button>
+
+        <div class="detail-layout">
+          <!-- Coluna esquerda: capa -->
+          <div class="detail-cover-col">
+            <img class="detail-cover" id="detail-cover" data-testid="detail-cover" src="" alt="" />
+            <div class="detail-cover-placeholder" id="detail-cover-placeholder" hidden>📚</div>
+
+            <div class="detail-meta">
+              <span class="badge badge-genre" id="detail-genre" data-testid="detail-genre"></span>
+              <span class="badge badge-year"  id="detail-year"  data-testid="detail-year"></span>
+              <span class="badge" id="detail-lido-badge" data-testid="detail-lido-badge"></span>
+            </div>
+
+            <!-- Score (visualizacao) -->
+            <div class="star-block">
+              <p class="star-label">Avaliação</p>
+              <div class="stars stars-readonly" id="detail-stars" data-testid="detail-stars" aria-label="Avaliação">
+                <span class="star" data-value="1" data-testid="detail-star-1">★</span>
+                <span class="star" data-value="2" data-testid="detail-star-2">★</span>
+                <span class="star" data-value="3" data-testid="detail-star-3">★</span>
+                <span class="star" data-value="4" data-testid="detail-star-4">★</span>
+                <span class="star" data-value="5" data-testid="detail-star-5">★</span>
+              </div>
+              <p class="star-hint" id="star-hint" data-testid="star-hint">Sem avaliação</p>
+            </div>
+          </div>
+
+          <!-- Coluna direita: informacoes de leitura -->
+          <div class="detail-info-col">
+            <input type="hidden" id="detail-book-id" data-testid="detail-book-id" />
+            <h2 class="detail-title" id="detail-title" data-testid="detail-title"></h2>
+            <p class="detail-author" id="detail-author" data-testid="detail-author"></p>
+
+            <div class="detail-field">
+              <label>Sinopse</label>
+              <p class="detail-text" id="detail-sinopse" data-testid="detail-sinopse"></p>
+            </div>
+
+            <div class="detail-field">
+              <label>Minha Review</label>
+              <p class="detail-text" id="detail-review" data-testid="detail-review"></p>
+            </div>
+
+            <div class="detail-actions">
+              <button class="btn btn-secondary" id="btn-detail-close-bottom" data-testid="btn-detail-close-bottom">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

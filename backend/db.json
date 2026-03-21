@@ -1,0 +1,41 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "titulo": "Dom Casmurro",
+      "autor": "Machado de Assis",
+      "genero": "Romance",
+      "ano": 1899,
+      "imagem": "https://covers.openlibrary.org/b/id/8739161-L.jpg",
+      "lido": true,
+      "sinopse": "Bentinho, narrador da história, conta sua vida desde a infância no Engenho Novo até a velhice. O grande tema do livro é a dúvida sobre a fidelidade de Capitu, sua esposa, com quem nutriu um amor desde jovem.",
+      "review": "Um dos maiores clássicos da literatura brasileira. A ambiguidade de Capitu é genial — Machado deixa o leitor decidir a culpa, tornando a releitura sempre reveladora.",
+      "score": 5
+    },
+    {
+      "id": 2,
+      "titulo": "O Senhor dos Anéis",
+      "autor": "J.R.R. Tolkien",
+      "genero": "Fantasia",
+      "ano": 1954,
+      "imagem": "https://covers.openlibrary.org/b/id/8406786-L.jpg",
+      "lido": false,
+      "sinopse": "A épica jornada de Frodo Bolseiro para destruir o Um Anel no Monte da Perdição, acompanhado pela Sociedade do Anel, enquanto o Senhor do Escuro Sauron busca recuperar seu poder.",
+      "review": "",
+      "score": 0
+    },
+    {
+      "id": 3,
+      "titulo": "1984",
+      "autor": "George Orwell",
+      "genero": "Distopia",
+      "ano": 1949,
+      "imagem": "https://covers.openlibrary.org/b/id/8575708-L.jpg",
+      "lido": true,
+      "sinopse": "Em uma sociedade totalitária governada pelo Grande Irmão, Winston Smith trabalha no Ministério da Verdade reescrevendo a história. Ao buscar a verdade e o amor, ele enfrenta as consequências de desafiar o sistema.",
+      "review": "Assustadoramente atual. Orwell previu com precisão os mecanismos de controle e manipulação da informação que vemos surgir no mundo moderno. Leitura obrigatória.",
+      "score": 4
+    }
+  ],
+  "nextId": 4
+}
