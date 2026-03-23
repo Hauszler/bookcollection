@@ -37,7 +37,21 @@ O servidor estará disponível em: `http://localhost:3001`
 
 Abra o arquivo `frontend/index.html` diretamente no navegador.
 
-> **Dica:** Use a extensão **Live Server** (VSCode) ou execute `npx serve frontend` para servir os arquivos estáticos.
+> **Dica:** Use a extensão **Live Server** (VSCode) ou execute o comando abaixo para servir os arquivos na porta 4000:
+> ```bash
+> npx serve frontend -l 4000
+> ```
+
+---
+
+## 🥒 Documentação Gherkin (BDD)
+
+A aplicação conta com documentação estruturada em Gherkin dentro do diretório `features/`. Estes arquivos descrevem o comportamento esperado do sistema:
+
+- **[visualizacao.feature](./features/visualizacao.feature):** Cenários de listagem, busca e detalhes.
+- **[gerenciamento.feature](./features/gerenciamento.feature):** Cenários de CRUD (cadastro, edição e exclusão).
+
+Para visualizar os cenários, basta abrir os arquivos `.feature`.
 
 ---
 
@@ -56,6 +70,10 @@ book-collection-app/
 │   ├── index.html              # Interface principal (data-testid em todos os elementos)
 │   ├── style.css               # Estilos
 │   └── script.js               # Lógica de UI e consumo da API
+├── features/                   # Documentação Gherkin (Cenários BDD)
+│   ├── visualizacao.feature
+│   └── gerenciamento.feature
+├── cypress/                    # Testes automatizados E2E
 ├── package.json
 └── README.md
 ```
