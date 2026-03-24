@@ -312,11 +312,13 @@ function closeDetailModal() {
 }
 
 // Detail modal close
-btnCloseDetail.addEventListener('click', closeDetailModal);
-btnDetailCloseBottom.addEventListener('click', closeDetailModal);
-detailOverlay.addEventListener('click', (e) => {
-  if (e.target === detailOverlay) closeDetailModal();
-});
+if (btnCloseDetail) btnCloseDetail.addEventListener('click', closeDetailModal);
+if (btnDetailCloseBottom) btnDetailCloseBottom.addEventListener('click', closeDetailModal);
+if (detailOverlay) {
+  detailOverlay.addEventListener('click', (e) => {
+    if (e.target === detailOverlay) closeDetailModal();
+  });
+}
 
 
 function clearFormErrors() {
@@ -454,20 +456,24 @@ btnConfirmCancel.addEventListener('click', () => {
 });
 
 // ── Event Listeners ──────────────────────────────────
-btnOpenForm.addEventListener('click', openAddForm);
-btnCloseForm.addEventListener('click', closeForm);
-btnCancel.addEventListener('click', closeForm);
+if (btnOpenForm) btnOpenForm.addEventListener('click', openAddForm);
+if (btnCloseForm) btnCloseForm.addEventListener('click', closeForm);
+if (btnCancel) btnCancel.addEventListener('click', closeForm);
 
 // Close modal clicking outside
-modalOverlay.addEventListener('click', (e) => {
-  if (e.target === modalOverlay) closeForm();
-});
-confirmOverlay.addEventListener('click', (e) => {
-  if (e.target === confirmOverlay) {
-    hideModal(confirmOverlay);
-    pendingDeleteId = null;
-  }
-});
+if (modalOverlay) {
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeForm();
+  });
+}
+if (confirmOverlay) {
+  confirmOverlay.addEventListener('click', (e) => {
+    if (e.target === confirmOverlay) {
+      hideModal(confirmOverlay);
+      pendingDeleteId = null;
+    }
+  });
+}
 
 // ── Utilities ────────────────────────────────────────
 function escapeHtml(str) {
