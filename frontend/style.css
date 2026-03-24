@@ -470,6 +470,13 @@ input:focus, textarea:focus {
   font-weight: 500;
 }
 
+.checkbox-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
 .checkbox-custom {
   width: 22px;
   height: 22px;
@@ -479,11 +486,35 @@ input:focus, textarea:focus {
   align-items: center;
   justify-content: center;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 input[type="checkbox"]:checked + .checkbox-custom {
   background: var(--primary);
   border-color: var(--primary);
+}
+
+.checkbox-custom::after {
+  content: '✓';
+  color: white;
+  font-size: 14px;
+  display: none;
+}
+
+input[type="checkbox"]:checked + .checkbox-custom::after {
+  display: block;
+}
+
+/* Reset button styles for stars in form */
+#form-stars .star {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .checkbox-custom::after {
@@ -542,12 +573,22 @@ input[type="checkbox"]:checked + .checkbox-custom::after {
 .star {
   font-size: 1.5rem;
   color: #e2e8f0;
-  cursor: pointer;
   transition: var(--transition);
+  cursor: default;
 }
 
-.star.active, .star:hover {
+.star.active {
   color: #f59e0b;
+}
+
+/* Interative stars in form */
+#form-stars .star {
+  cursor: pointer;
+}
+
+#form-stars .star:hover {
+  color: #f59e0b;
+  transform: scale(1.15);
 }
 
 /* ===== Responsive ===== */
